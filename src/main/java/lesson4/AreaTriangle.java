@@ -9,13 +9,4 @@ public class AreaTriangle {
             return Math.sqrt(p * (p - a) * (p - b) * (p - c));
         }
     }
-
-
-   public static void main(String[] args) {
-        System.out.println(heronsFormula(16, 22, 16));
-        System.out.println(heronsFormula(3, 4, 5));
-        System.out.println(heronsFormula(200, 0, 200));
-       System.out.println(heronsFormula(169, 202, 136));
-    }
-
 }
