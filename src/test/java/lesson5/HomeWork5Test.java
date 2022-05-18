@@ -38,26 +38,22 @@ public class HomeWork5Test {
         driver.findElement(By.xpath("//span[@title='Continue shopping']/span")).click();
 
         driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li/a[@title='Dresses']")).click();
-
         driver.findElement(By.xpath("//a[@data-id-product= '7']/span")).click();
+
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@title='Continue shopping']/span")));
         driver.findElement(By.xpath("//span[@title='Continue shopping']/span")).click();
 
         driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li/a[@title='T-shirts']")).click();
-
         driver.findElement(By.xpath("//a[@data-id-product= '1']/span")).click();
+
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Proceed to checkout']/span")));
         driver.findElement(By.xpath("//a[@title='Proceed to checkout']/span")).click();
 
         Assertions.assertEquals(driver.findElements(By.className("cart_item")).size(), 3);
 
-        //тест у меня успешен только в таком виде: с тремя "плохими" ожиданиями, с "хорошими" - фэйлится. Не знаю причины и не знаю, как сделать правильно
-        driver.findElement(By.className("icon-trash")).click();
-        Thread.sleep(5000);
-        driver.findElement(By.className("icon-trash")).click();
-        Thread.sleep(5000);
-        driver.findElement(By.className("icon-trash")).click();
+        driver.findElements(By.className("icon-trash")).forEach((elem) -> elem.click());
 
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Your shopping cart is empty.']")));
         Thread.sleep(5000);
 
         Assertions.assertTrue(driver.findElement(By.xpath("//p[text()='Your shopping cart is empty.']")).isDisplayed());
@@ -67,19 +63,21 @@ public class HomeWork5Test {
     @Test
     void purchaseUnauthorizedUser() {
         driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li/a[@title='Dresses']")).click();
+
         driver.findElement(By.xpath("//a[@data-id-product='4']/span")).click();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@title='Continue shopping']/span")));
         driver.findElement(By.xpath("//span[@title='Continue shopping']/span")).click();
 
         driver.findElement(By.xpath("//a[@data-id-product= '7']/span")).click();
+        
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@title='Proceed to checkout']/span")));
         driver.findElement(By.xpath("//a[@title='Proceed to checkout']/span")).click();
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Proceed to checkout']")));
         driver.findElement(By.xpath("//span[text()='Proceed to checkout']")).click();
 
-        Assertions.assertEquals(driver.findElement(By.id("email_create")).isDisplayed(), true);
+        Assertions.assertTrue(driver.findElement(By.id("email_create")).isDisplayed());
     }
 
     @AfterEach
