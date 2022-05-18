@@ -30,7 +30,7 @@ public class HomeWork5Test {
     }
 
     @Test
-    void addingAndRemovingItemsToCartUnauthorizedUser() throws InterruptedException {
+    void addingAndRemovingItemsToCartUnauthorizedUser() {
         driver.findElement(By.xpath("//*[@id='block_top_menu']/ul/li/a[@title='Women']")).click();
         driver.findElement(By.xpath("//a[@data-id-product='2']/span")).click();
 
@@ -54,7 +54,6 @@ public class HomeWork5Test {
         driver.findElements(By.className("icon-trash")).forEach((elem) -> elem.click());
 
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Your shopping cart is empty.']")));
-        Thread.sleep(5000);
 
         Assertions.assertTrue(driver.findElement(By.xpath("//p[text()='Your shopping cart is empty.']")).isDisplayed());
     }
